@@ -24,7 +24,9 @@ async function useApi<ResponseSuccess = {}, ResponseError = {}>(
 
   const axios = useNuxtApp().$axios;
 
-  return (await axios(data).then((response) => response.data)) as ResponseApi<
+  return (await axios(data)
+    .then((response) => response.data)
+    .catch((response) => response.response?.data)) as ResponseApi<
     ResponseSuccess,
     ResponseError
   >;
